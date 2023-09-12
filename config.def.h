@@ -15,8 +15,8 @@ static const char dmenufont[]       = "monospace:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_gray4[]       = "#000000";
+static const char col_yellow[]      = "#f6ec76";
 static const char col_urgborder[]   = "#ff0000";
 static const char col1[]            = "#ffffff";
 static const char col2[]            = "#ffffff";
@@ -24,22 +24,41 @@ static const char col3[]            = "#ffffff";
 static const char col4[]            = "#ffffff";
 static const char col5[]            = "#ffffff";
 static const char col6[]            = "#ffffff";
-enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
-       SchemeCol5, SchemeCol6, SchemeSel, SchemeUrg }; /* color schemes */
 
-static const unsigned int baralpha = 0x00;
-static const unsigned int borderalpha = OPAQUE;
+
+static const char norm_fg[] = "#e3cce0";
+static const char norm_bg[] = "#0f0915";
+static const char norm_border[] = "#9e8e9c";
+
+static const char sel_fg[] = "#e3cce0";
+static const char sel_bg[] = "#67549C";
+static const char sel_border[] = "#e3cce0";
+
+static const char urg_fg[] = "#e3cce0";
+static const char urg_bg[] = "#3E56BF";
+static const char urg_border[] = "#3E56BF";
+
+enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+//enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
+//       SchemeCol5, SchemeCol6, SchemeSel, SchemeUrg }; /* color schemes */
+
+static const unsigned int baralpha = 0xAF;
+static const unsigned int borderalpha = 0xFF;
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm]  = { col_gray3, col_gray1, col_gray2 },
-	[SchemeCol1]  = { col1,      col_gray1, col_gray2 },
-	[SchemeCol2]  = { col2,      col_gray1, col_gray2 },
-	[SchemeCol3]  = { col3,      col_gray1, col_gray2 },
-	[SchemeCol4]  = { col4,      col_gray1, col_gray2 },
-	[SchemeCol5]  = { col5,      col_gray1, col_gray2 },
-	[SchemeCol6]  = { col6,      col_gray1, col_gray2 },
-	[SchemeSel]   = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
+    [SchemeNorm] = { norm_fg,     norm_bg,   norm_border }, // unfocused wins
+    [SchemeSel]  = { sel_fg,      sel_bg,    sel_border },  // the focused win
+    [SchemeUrg] =  { urg_fg,      urg_bg,    urg_border },
+
+    /*               fg         bg         border   */
+//	[SchemeNorm]  = { col_gray3, col_gray1, col_gray2 },
+//	[SchemeCol1]  = { col1,      col_gray1, col_gray2 },
+//	[SchemeCol2]  = { col2,      col_gray1, col_gray2 },
+//	[SchemeCol3]  = { col3,      col_gray1, col_gray2 },
+//	[SchemeCol4]  = { col4,      col_gray1, col_gray2 },
+//	[SchemeCol5]  = { col5,      col_gray1, col_gray2 },
+//	[SchemeCol6]  = { col6,      col_gray1, col_gray2 },
+//	[SchemeSel]   = { col_gray4, col_yellow,  col_yellow  },
+//	[SchemeUrg]  = { col_gray4, col_yellow,  col_urgborder  },
 };
 
 static const unsigned int alphas[][3]      = {
@@ -87,8 +106,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_yellow, "-sf", col_gray4, NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 static const char *Lock[]  = { "i3lock", NULL };
 static const char *MANAPICKER[] = { "SXIVPICKER" , NULL };
